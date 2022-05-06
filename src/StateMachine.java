@@ -25,23 +25,44 @@ public class StateMachine {
     public void controller() {
         while (true) {
             count++;
-            state1.setStateTrue();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
                 // to stay in state 1
-                if (state1.enable && count >= 0 && count < 10) {
+                if (count >= 0 && count < 10) {
+                    state1.setStateTrue();
                     state1.setStateTrue();
                 }
-                // to stay in state 2
+                // to enter and stay in state 2
                 else if (state1.enable && count >= 10 && count < 20) {
                     state1.setStateFalse();
                     state2.setStateTrue();
                 }
-                // to stay in state 3
-                else if (state1.enable && count >= 20 && count < 30) {
+                // to enter and stay in state 3
+                else if (state2.enable && count >= 20 && count < 30) {
                     state2.setStateFalse();
                     state3.setStateTrue();
                 }
+                // to  enter and stay in state 4
+                else if (state3.enable && count >= 30 && count < 40) {
+                    state3.setStateFalse();
+                    state4.setStateTrue();
+                }
+                // to  enter and stay in state 5
+                else if (state4.enable && count >= 40 && count < 50) {
+                    state4.setStateFalse();
+                    state5.setStateTrue();
+                }
+                // to  enter and stay in state 6
+                else if (state5.enable && count >= 50 && count < 60) {
+                    state5.setStateFalse();
+                    state6.setStateTrue();
+                }
+                else if (count > 60){
+                    state6.setStateFalse();
+                    state1.setStateTrue();
+                    count = 0;
+                }
+
 
 
                 System.out.println(count);
